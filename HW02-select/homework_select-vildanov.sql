@@ -99,7 +99,7 @@ select dm.DeliveryMethodName, po.ExpectedDeliveryDate, s.SupplierName, p.Preferr
 join Application.DeliveryMethods dm on po.DeliveryMethodID = dm.DeliveryMethodID
 join Purchasing.Suppliers s on s.SupplierID = po.SupplierID
 join Application.People p on p.PersonID = po.ContactPersonID
-where po.ExpectedDeliveryDate between '2012-12-31' and '2013-02-01'
+where po.ExpectedDeliveryDate between '2013-01-01' and '2013-01-31'
 and dm.DeliveryMethodName in ('Air Freight', 'Refrigerated Air Freight')
 and po.IsOrderFinalized = 1
 order by po.ExpectedDeliveryDate
@@ -121,7 +121,9 @@ order by o.OrderDate desc
 Имя товара смотреть в таблице Warehouse.StockItems.
 */
 
-select si.SupplierID, s.SupplierName, s.PhoneNumber from Warehouse.StockItems si
-join Purchasing.Suppliers s on s.SupplierID = si.SupplierID
+select distinct c.CustomerID, c.CustomerName, c.PhoneNumber from Warehouse.StockItems si
+join Sales.OrderLines ol on si.StockItemID = ol.StockItemID
+join Sales.Orders o on o.OrderID = ol.OrderID
+join Sales.Customers c on c.CustomerID = o.CustomerID
 where si.StockItemName = 'Chocolate frogs 250g'
-order by si.SupplierID
+order by c.CustomerName, c.CustomerID
