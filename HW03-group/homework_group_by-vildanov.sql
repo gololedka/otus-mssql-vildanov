@@ -30,10 +30,12 @@ USE WideWorldImporters
 Продажи смотреть в таблице Sales.Invoices и связанных таблицах.
 */
 
-select	year(i.InvoiceDate) [SaleYear], 
+select	
+		year(i.InvoiceDate) [SaleYear], 
 		month(i.InvoiceDate) [SaleMonth],
 		avg(ol.UnitPrice) [avgUnitPrice], 
 		sum(ol.Quantity * ol.UnitPrice) [sumCost]
+		
 from Sales.Invoices i
 join Sales.OrderLines ol on ol.OrderID = i.OrderID
 Group by year(i.InvoiceDate), month(i.InvoiceDate)
@@ -50,9 +52,11 @@ order by SaleYear, SaleMonth
 Продажи смотреть в таблице Sales.Invoices и связанных таблицах.
 */
 
-select	year(i.InvoiceDate) [saleYear], 
-		month(i.InvoiceDate) [saleMonth], 
-		SUM(ol.Quantity * ol.UnitPrice) [sumGain] 
+select	
+		year(i.InvoiceDate) [saleYear],
+		month(i.InvoiceDate) [saleMonth],
+		SUM(ol.Quantity * ol.UnitPrice) [sumGain]
+		
 from Sales.Invoices i
 join Sales.OrderLines ol on ol.OrderID = i.OrderID
 group by year(i.InvoiceDate), month(i.InvoiceDate)
@@ -76,7 +80,8 @@ order by saleYear, saleMonth
 Продажи смотреть в таблице Sales.Invoices и связанных таблицах.
 */
 
-select	year(i.InvoiceDate) [saleYear],
+select	
+		year(i.InvoiceDate) [saleYear],
 		month(i.InvoiceDate) [saleMonth],
 		ol.Description,
 		sum(ol.UnitPrice * ol.Quantity) [sumGain],
