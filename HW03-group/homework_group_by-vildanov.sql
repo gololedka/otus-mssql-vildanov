@@ -31,10 +31,10 @@ USE WideWorldImporters
 */
 
 select	
-		year(i.InvoiceDate) [SaleYear], 
-		month(i.InvoiceDate) [SaleMonth],
-		avg(ol.UnitPrice) [avgUnitPrice], 
-		sum(ol.Quantity * ol.UnitPrice) [sumCost]
+	year(i.InvoiceDate) [SaleYear], 
+	month(i.InvoiceDate) [SaleMonth],
+	avg(ol.UnitPrice) [avgUnitPrice], 
+	sum(ol.Quantity * ol.UnitPrice) [sumCost]
 		
 from Sales.Invoices i
 join Sales.OrderLines ol on ol.OrderID = i.OrderID
@@ -53,9 +53,9 @@ order by SaleYear, SaleMonth
 */
 
 select	
-		year(i.InvoiceDate) [saleYear],
-		month(i.InvoiceDate) [saleMonth],
-		SUM(ol.Quantity * ol.UnitPrice) [sumGain]
+	year(i.InvoiceDate) [saleYear],
+	month(i.InvoiceDate) [saleMonth],
+	SUM(ol.Quantity * ol.UnitPrice) [sumGain]
 		
 from Sales.Invoices i
 join Sales.OrderLines ol on ol.OrderID = i.OrderID
@@ -81,12 +81,12 @@ order by saleYear, saleMonth
 */
 
 select	
-		year(i.InvoiceDate) [saleYear],
-		month(i.InvoiceDate) [saleMonth],
-		ol.Description,
-		sum(ol.UnitPrice * ol.Quantity) [sumGain],
-		min(i.InvoiceDate) [firstSellDate],
-		sum(ol.Quantity) [sumQuantity]
+	year(i.InvoiceDate) [saleYear],
+	month(i.InvoiceDate) [saleMonth],
+	ol.Description,
+	sum(ol.UnitPrice * ol.Quantity) [sumGain],
+	min(i.InvoiceDate) [firstSellDate],
+	sum(ol.Quantity) [sumQuantity]
 
 from Sales.Invoices i
 join Sales.OrderLines ol on ol.OrderID = i.OrderID
